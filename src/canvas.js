@@ -153,45 +153,40 @@ class Diamond {
 	  }
 };
 
-const diamondArray = [];
+const shapeArray = [];
+
 if (style === 'diamond') {
 	for (let i = 0; i < 400; i++) {
-	let width = Math.random() * 20 + 4;
-	let x = Math.random() * window.innerWidth;
-	let dx = (Math.random() - 0.5) * 1;
-	let y = Math.random() * window.innerHeight;
-	let dy = (Math.random() - 0.5) * 1;
-	diamondArray.push(new Diamond(x, y, dx, dy, width));
+		let width = Math.random() * 20 + 4;
+		let x = Math.random() * window.innerWidth;
+		let dx = (Math.random() - 0.5) * 1;
+		let y = Math.random() * window.innerHeight;
+		let dy = (Math.random() - 0.5) * 1;
+		shapeArray.push(new Diamond(x, y, dx, dy, width));
+	};
+} else if (style === 'line') {
+	// Fill screen with lines
+	for (let i = 0; i < 100; i++) {
+		const start = { x: -250, y: 800};
+		const random = Math.random() - 0.5;
+		const unit = 25;
+	
+		shapeArray.push(
+			new Line(
+				start.x + ((unit + random) * i),
+				start.y + (i + random) * -3 + Math.sin(i) * unit,
+				0.1 + (1 * i)
+			)
+		);
 	};
 };
 
-
-// Fill screen with lines
-const lineArray = [];
-for (let i = 0; i < 100; i++) {
-	const start = { x: -250, y: 800};
-	const random = Math.random() - 0.5;
-	const unit = 25;
-
-	lineArray.push(
-		new Line(
-			start.x + ((unit + random) * i),
-			start.y + (i + random) * -3 + Math.sin(i) * unit,
-			0.1 + (1 * i)
-		)
-	);
-};
 
 function animate() {
 	requestAnimationFrame(animate);
 	context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-	if (style === 'diamond') {
-		diamondArray.forEach(diamond => {
-			diamond.draw();
-		});
-	};
-	lineArray.forEach(line => {
-		line.draw();
+	shapeArray.forEach(diamond => {
+		diamond.draw();
 	});
 };
 
