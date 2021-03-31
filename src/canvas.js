@@ -36,13 +36,59 @@ class Shape {
 		// control movement and interactivity
 		this.draw();
 	};
-}
+};
+
+class Line {
+	constructor(x, y, offset) {
+		this.x = x;
+		this.y = y;
+		this.offset = offset;
+		this.radians = 0;
+		this.velocity = 0.01;
+	};
+
+	draw = () => {
+		context.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+		context.fillStyle = 'rgba(255, 255, 255, 0.3)';
+
+		context.beginPath();
+		context.arc(this.x, this.y, 1, 0, Math.PI * 2, false);
+		context.fill();
+		context.moveTo(this.x, this.y);
+		context.lineTo(this.x + 300, this.y - 1000);
+		context.stroke();
+		context.closePath();
+
+		this.update();
+	};
+
+	update = () => {
+		// control movement and interactivity
+	};
+};
 
 function animate() {
 	requestAnimationFrame(animate);
 	context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+	lineArray.forEach(line => {
+		line.draw();
+	});
+};
 
-	// call our animation method like Shape.draw()
+
+// Fill screen with lines
+const lineArray = [];
+for (let i = 0; i < 100; i++) {
+	const start = { x: -250, y: 800};
+	const unit = 25;
+
+	lineArray.push(
+		new Line(
+			start.x + unit * i,
+			start.y + i * -3,
+			0.1 + (1 * i)
+		)
+	);
 };
 
 animate();
