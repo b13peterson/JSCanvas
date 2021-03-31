@@ -150,7 +150,20 @@ class Diamond {
 		}
 		this.x += this.dx;
 		this.y += this.dy;
-	  }
+
+		if (mouse.x - (this.x) < 80 && mouse.x - (this.x) > -80
+			&& mouse.y - (this.y) < 80 && mouse.y - (this.y) > -80
+			&& this.width < this.maxWidth
+			) {
+			this.width += 1;
+			this.x -= 1;
+			this.y -= 1;
+		} else if (this.width > this.minWidth) {
+			this.width -= 1;
+			this.x += 1;
+			this.y += 1;
+		};
+	};
 };
 
 const shapeArray = [];
@@ -180,7 +193,6 @@ if (style === 'diamond') {
 		);
 	};
 };
-
 
 function animate() {
 	requestAnimationFrame(animate);
