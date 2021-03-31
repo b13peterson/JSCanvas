@@ -1,16 +1,21 @@
 // Source: https://medium.com/@bretcameron/create-interactive-visuals-with-javascript-and-html5-canvas-5f466d0b26de
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
-import './utils/adjustments';
 
-window.addEventListener('resize', resize(canvas));
+
+function resizeCanvas() {
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+} 
+
+window.addEventListener('resize', resizeCanvas());
 
 let mouse = {
 	x: undefined,
 	y: undefined
 };
 
-window.addEventListener('mousemove', function (event) {
+window.addEventListener('mousemove', function (e) {
 	mouse.x = event.x;
 	mouse.y = event.y;
 });
