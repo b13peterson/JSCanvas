@@ -6,17 +6,18 @@ function resizeCanvas() {
 	canvas.height = window.innerHeight;
 } 
 
-window.addEventListener('resize', resizeCanvas());
+window.addEventListener('resize', resizeCanvas);
 
 let mouse = {
 	x: undefined,
 	y: undefined
 };
 
-window.addEventListener('mousemove', function (e) {
+window.addEventListener('mousemove', function (event) {
 	mouse.x = event.x;
 	mouse.y = event.y;
 });
+
 
 class Timeline {
 	constructor(timeInterval, min, max) {
@@ -28,8 +29,9 @@ class Timeline {
 
 		this.events = [];
 		this.intervals = [];
+
 		this.canvasResized();
-		window.addEventListener('resize', this.canvasResized());
+		window.addEventListener('resize', this.canvasResized);
 		this.drawBaseline();
 	};
 
