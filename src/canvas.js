@@ -1,7 +1,7 @@
 // Source: https://medium.com/@bretcameron/create-interactive-visuals-with-javascript-and-html5-canvas-5f466d0b26de
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
-import './utils/adjustments';
+ './utils/adjustments';
 
 window.addEventListener('resize', resize(canvas));
 
@@ -107,4 +107,4 @@ function animate() {
 	});
 };
 
-animate();
+export { animate };
