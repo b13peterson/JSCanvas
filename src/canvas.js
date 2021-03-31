@@ -2,7 +2,6 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
-
 function resizeCanvas() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -86,6 +85,29 @@ class Line {
 	};
 };
 
+class Diamond {
+	constructor(x, y, dx, dy, width) {
+		this.x = x;
+		this.y = y;
+		this.dx = dx;
+		this.dy = dy;
+		this.width = width;
+		this.minWidth = width;
+		this.maxWidth = width * 3;
+
+		let colorArray = [
+			'#de3d3d',
+			'#090c0b',
+			'#0d2527',
+			'#267368',
+			'#00b1a0'
+		  ];
+
+		this.color = colorArray[
+			Math.floor(Math.random() * colorArray.length)
+		];
+	};
+};
 
 
 // Fill screen with lines
