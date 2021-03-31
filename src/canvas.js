@@ -51,6 +51,22 @@ class Line {
 		context.strokeStyle = 'rgba(255, 255, 255, 0.5)';
 		context.fillStyle = 'rgba(255, 255, 255, 0.3)';
 
+		// Draw wide lines invisibly behind visible lines for mouse interaction
+		const drawLinePath = (width = 0, color) => {
+			context.beginPath();
+			context.moveTo(this.x - (width / 2), this.y + (width / 2));
+			context.lineTo(this.x - (width / 2) + 300, this.y - (width / 2) - 1000);
+			context.lineTo(this.x + (width / 2) + 300, this.y - (width / 2) - 1000);
+			context.lineTo(this.x + (width / 2), this.y - (width / 2));
+			context.closePath();
+			if (context.isPointInPath(mouse.x, mouse.y) && color) {
+				context.strokeStyle = color;
+			};
+		};
+
+		drawLinePath(150, '#baf2ef');
+		drawLinePath(50, '#dcf3ff');
+
 		context.beginPath();
 		context.arc(this.x, this.y, 1, 0, Math.PI * 2, false);
 		context.fill();
@@ -61,6 +77,7 @@ class Line {
 
 		this.update();
 	};
+	
 
 	update = () => {
 		// control movement and interactivity
@@ -69,13 +86,6 @@ class Line {
 	};
 };
 
-function animate() {
-	requestAnimationFrame(animate);
-	context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-	lineArray.forEach(line => {
-		line.draw();
-	});
-};
 
 
 // Fill screen with lines
@@ -92,6 +102,14 @@ for (let i = 0; i < 100; i++) {
 			0.1 + (1 * i)
 		)
 	);
+};
+
+function animate() {
+	requestAnimationFrame(animate);
+	context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+	lineArray.forEach(line => {
+		line.draw();
+	});
 };
 
 animate();
