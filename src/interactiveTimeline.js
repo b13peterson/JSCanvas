@@ -52,17 +52,13 @@ class Timeline {
 		context.fillStyle = 'rgba(255, 255, 255, 0.3)';
 		const startValue = Math.round(this.min / this.timeInterval) * this.timeInterval;
 		const intervalCount = Math.round(this.max - this.min) / this.timeInterval;
-		const majorInterval = Math.log2(intervalCount) * this.timeInterval;
+		const majorInterval = Math.round(Math.log2(intervalCount)) * this.timeInterval;
 		for (let i = startValue; i < this.max; i += this.timeInterval) {
-			const isMajor = (i % majorInterval === 0);
+			const dy = (i % majorInterval === 0) ? this.defaultIntervalHeight : this.defaultIntervalHeight / 2;
 			const xPos = this.scaleToCanvas(i);
 			context.beginPath();
-			context.moveTo(xPos, this.y + this.defaultIntervalHeight / 2);
-			if (isMajor) {
-				context.lineTo(xPos, this.y - this.defaultIntervalHeight);
-			} else {
-				context.lineTo(xPos, this.y - this.defaultIntervalHeight / 2);
-			}
+			context.moveTo(xPos, this.y + dy);
+			context.lineTo(xPos, this.y - dy);
 			context.stroke();
 		};
 	};
