@@ -2,6 +2,8 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
+let style = 'diamond';
+
 function resizeCanvas() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -109,32 +111,48 @@ class Diamond {
 	};
 
 	draw = () => {
-		c.beginPath();
-		c.moveTo(this.x, this.y);
-		c.lineTo(
+		context.beginPath();
+		context.moveTo(this.x, this.y);
+		context.lineTo(
 		  this.x - this.width / 2,
 		  this.y
 		);
-		c.lineTo(
+		context.lineTo(
 		  this.x,
 		  this.y + this.width / 2
 		);
-		c.lineTo(
+		context.lineTo(
 		  this.x + this.width / 2,
 		  this.y
 		);
-		c.lineTo(
+		context.lineTo(
 		  this.x,
 		  this.y - this.width / 2
 		);
-		c.lineTo(
+		context.lineTo(
 		  this.x - this.width / 2,
 		  this.y
 		);
-		c.closePath();
-		c.fillStyle = this.color;
-		c.fill();
+		context.closePath();
+		context.fillStyle = this.color;
+		context.fill();
 		this.update();
+	};
+
+	update = () => {
+
+	};
+};
+
+const diamondArray = [];
+if (style === 'diamond') {
+	for (let i = 0; i < 400; i++) {
+	let width = Math.random() * 20 + 4;
+	let x = Math.random() * window.innerWidth;
+	let dx = (Math.random() - 0.5) * 1;
+	let y = Math.random() * window.innerHeight;
+	let dy = (Math.random() - 0.5) * 1;
+	diamondArray.push(new Diamond(x, y, dx, dy, width));
 	};
 };
 
@@ -158,6 +176,11 @@ for (let i = 0; i < 100; i++) {
 function animate() {
 	requestAnimationFrame(animate);
 	context.clearRect(0, 0, window.innerWidth, window.innerHeight);
+	if (style === 'diamond') {
+		diamondArray.forEach(diamond => {
+			diamond.draw();
+		});
+	};
 	lineArray.forEach(line => {
 		line.draw();
 	});
