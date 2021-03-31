@@ -80,12 +80,13 @@ function animate() {
 const lineArray = [];
 for (let i = 0; i < 100; i++) {
 	const start = { x: -250, y: 800};
+	const random = Math.random() - 0.5;
 	const unit = 25;
 
 	lineArray.push(
 		new Line(
-			start.x + unit * i,
-			start.y + i * -3,
+			start.x + ((unit + random) * i),
+			start.y + (i + random) * -3 + Math.sin(i) * unit,
 			0.1 + (1 * i)
 		)
 	);
