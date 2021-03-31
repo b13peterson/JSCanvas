@@ -107,6 +107,35 @@ class Diamond {
 			Math.floor(Math.random() * colorArray.length)
 		];
 	};
+
+	draw = () => {
+		c.beginPath();
+		c.moveTo(this.x, this.y);
+		c.lineTo(
+		  this.x - this.width / 2,
+		  this.y
+		);
+		c.lineTo(
+		  this.x,
+		  this.y + this.width / 2
+		);
+		c.lineTo(
+		  this.x + this.width / 2,
+		  this.y
+		);
+		c.lineTo(
+		  this.x,
+		  this.y - this.width / 2
+		);
+		c.lineTo(
+		  this.x - this.width / 2,
+		  this.y
+		);
+		c.closePath();
+		c.fillStyle = this.color;
+		c.fill();
+		this.update();
+	};
 };
 
 
