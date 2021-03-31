@@ -64,6 +64,8 @@ class Line {
 
 	update = () => {
 		// control movement and interactivity
+		this.radians += this.velocity;
+		this.y = this.y + Math.cos(this.radians + this.offset);
 	};
 };
 
