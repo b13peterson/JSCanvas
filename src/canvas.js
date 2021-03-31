@@ -140,8 +140,17 @@ class Diamond {
 	};
 
 	update = () => {
-
-	};
+		if (this.x + (this.width / 2) >= window.innerWidth
+		  || this.x - (this.width / 2) <= 0) {
+		  this.dx = -this.dx;
+		}
+		if (this.y + (this.width / 2) >= window.innerHeight
+		  || this.y - (this.width / 2) <= 0) {
+		  this.dy = -this.dy;
+		}
+		this.x += this.dx;
+		this.y += this.dy;
+	  }
 };
 
 const diamondArray = [];
