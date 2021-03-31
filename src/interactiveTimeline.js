@@ -35,7 +35,7 @@ class Timeline {
 
 	canvasResized = () => {
 		this.y = 2 * canvas.height / 3;
-		this.defaultIntervalHeight = canvas.height / 30;
+		this.defaultIntervalHeight = canvas.height / 40;
 	};
 
 	draw = () => {
@@ -50,16 +50,20 @@ class Timeline {
 	drawIntervals = () => {
 		context.strokeStyle = 'rgba(255, 255, 255, 0.5)';
 		context.fillStyle = 'rgba(255, 255, 255, 0.3)';
+		context.textAlign = "center";
+
 		const startValue = Math.round(this.min / this.timeInterval) * this.timeInterval;
 		const intervalCount = Math.round(this.max - this.min) / this.timeInterval;
 		const majorInterval = Math.round(Math.log2(intervalCount)) * this.timeInterval;
-		for (let i = startValue; i < this.max; i += this.timeInterval) {
-			const dy = (i % majorInterval === 0) ? this.defaultIntervalHeight : this.defaultIntervalHeight / 2;
+		for (let i = startValue; i <= this.max; i += this.timeInterval) {
+			const dy = (i % majorInterval === 0) ? this.defaultIntervalHeight : this.defaultIntervalHeight / 1.7;
 			const xPos = this.scaleToCanvas(i);
 			context.beginPath();
 			context.moveTo(xPos, this.y + dy);
 			context.lineTo(xPos, this.y - dy);
 			context.stroke();
+
+			context.strokeText(i, xPos, this.y + (this.defaultIntervalHeight*1.5));
 		};
 	};
 
